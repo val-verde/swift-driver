@@ -112,7 +112,7 @@ let package = Package(
 if ProcessInfo.processInfo.environment["SWIFT_DRIVER_LLBUILD_FWK"] == nil {
     if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
         package.dependencies += [
-            .package(url: "https://github.com/apple/swift-llbuild.git", .branch("main")),
+            .package(url: "https://github.com/val-verde/swift-llbuild.git", .branch("val-verde-mainline")),
         ]
     } else {
         // In Swift CI, use a local path to llbuild to interoperate with tools
@@ -126,13 +126,13 @@ if ProcessInfo.processInfo.environment["SWIFT_DRIVER_LLBUILD_FWK"] == nil {
 
 if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
   package.dependencies += [
-    .package(url: "https://github.com/apple/swift-tools-support-core.git", .branch("main")),
-    .package(url: "https://github.com/jpsim/Yams.git", .upToNextMinor(from: "4.0.0")),
+    .package(url: "https://github.com/val-verde/swift-tools-support-core.git", .branch("val-verde-mainline")),
+    .package(url: "https://github.com/val-verde/Yams.git", .branch("val-verde-mainline")),
     // The 'swift-argument-parser' version declared here must match that
     // used by 'swift-package-manager' and 'sourcekit-lsp'. Please coordinate
     // dependency version changes here with those projects.
-    .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "0.4.1")),
-    ]
+    .package(url: "https://github.com/val-verde/swift-argument-parser.git", .branch("val-verde-mainline")),
+  ]
 } else {
     package.dependencies += [
         .package(path: "../swift-tools-support-core"),
