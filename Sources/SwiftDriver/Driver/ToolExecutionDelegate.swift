@@ -14,7 +14,7 @@ import TSCBasic
 #if canImport(Darwin)
 import Darwin.C
 #elseif os(Windows)
-import ucrt
+import CRT
 import WinSDK
 #elseif canImport(Glibc)
 import Glibc
