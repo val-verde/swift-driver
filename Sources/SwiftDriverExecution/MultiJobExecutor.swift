@@ -25,6 +25,9 @@ import SwiftDriver
 @_implementationOnly import llbuild
 #endif
 
+#if canImport(WinSDK)
+import WinSDK
+#endif
 
 public final class MultiJobExecutor {
 

@@ -13,6 +13,10 @@ import Foundation
 import TSCBasic
 import SwiftOptions
 
+#if canImport(WinSDK)
+import WinSDK
+#endif
+
 extension Diagnostic.Message {
   static func warn_scanner_frontend_fallback() -> Diagnostic.Message {
     .warning("Fallback to `swift-frontend` dependency scanner invocation")

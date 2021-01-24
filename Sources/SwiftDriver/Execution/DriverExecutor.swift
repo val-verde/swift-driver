@@ -13,6 +13,10 @@
 import TSCBasic
 import Foundation
 
+#if canImport(WinSDK)
+import WinSDK
+#endif
+
 public protocol DriverExecutor {
   var resolver: ArgsResolver { get }
 
