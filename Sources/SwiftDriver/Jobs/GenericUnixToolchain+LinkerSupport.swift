@@ -14,24 +14,7 @@ import SwiftOptions
 
 extension GenericUnixToolchain {
   private func defaultLinker(for targetTriple: Triple) -> String? {
-    if targetTriple.os == .openbsd {
-      return "lld"
-    }
-
-    switch targetTriple.arch {
-    case .arm, .aarch64, .armeb, .thumb, .thumbeb:
-      // BFD linker has issues wrt relocation of the protocol conformance
-      // section on these targets, it also generates COPY relocations for
-      // final executables, as such, unless specified, we default to gold
-      // linker.
-      return "gold"
-    case .x86, .x86_64, .ppc64, .ppc64le, .systemz:
-      // BFD linker has issues wrt relocations against protected symbols.
-      return "gold"
-    default:
-      // Otherwise, use the default BFD linker.
-      return ""
-    }
+    return "lld"
   }
 
   private func majorArchitectureName(for triple: Triple) -> String {
