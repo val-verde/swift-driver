@@ -271,7 +271,7 @@ extension Triple {
       return conflatingDarwin ? "darwin" : darwinPlatform.platformName
 
     case .linux:
-      return environment == .android ? "android" : "linux"
+      return environment == .android ? "android" : environment == .musl ? "musl" : "linux"
     case .freeBSD:
       return "freebsd"
     case .openbsd:

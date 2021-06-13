@@ -137,7 +137,7 @@ public struct OutputFileMap: Hashable, Codable {
   ) throws {
     let encoder = JSONEncoder()
 
-  #if os(Linux) || os(Android)
+  #if os(Linux) || os(Musl) || os(Android)
     encoder.outputFormatting = [.prettyPrinted]
   #else
     if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *) {

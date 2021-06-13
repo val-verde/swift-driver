@@ -16,7 +16,7 @@ import Darwin
 import Glibc
 #endif
 
-#if os(macOS) || os(Linux) || os(Android) || os(OpenBSD)
+#if os(macOS) || os(Linux) || os(Musl) || os(Android) || os(OpenBSD)
 // Adapted from llvm::sys::commandLineFitsWithinSystemLimits.
 func commandLineFitsWithinSystemLimits(path: String, args: [String]) -> Bool {
   let upperBound = sysconf(Int32(_SC_ARG_MAX))
@@ -35,7 +35,7 @@ func commandLineFitsWithinSystemLimits(path: String, args: [String]) -> Bool {
 
   var commandLineLength = path.utf8.count + 1
   for arg in args {
-    #if os(Linux) || os(Android)
+    #if os(Linux) || os(Musl) || os(Android)
       // Linux limits the length of each individual argument to MAX_ARG_STRLEN.
       // There is no available constant, so it is hardcoded here.
       guard arg.utf8.count < 32 * 4096 else {
