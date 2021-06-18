@@ -59,13 +59,21 @@ import SwiftOptions
   }
 
   private func lookupToolPath(_ tool: Tool) throws -> AbsolutePath {
+    let getToolFromEnv: (String) -> String? = {
+      guard let envVar = getenv($0) else {
+        return nil
+      }
+
+      return String(cString: envVar)
+    }
+
     switch tool {
     case .swiftCompiler:
       return try lookup(executable: "swift-frontend")
     case .dynamicLinker:
-      return try lookup(executable: "ld")
+      return try lookup(executable: getToolFromEnv("LD") ?? "ld")
     case .staticLinker:
-      return try lookup(executable: "libtool")
+      return try lookup(executable: getToolFromEnv("LIBTOOL") ?? "libtool")
     case .dsymutil:
       return try lookup(executable: "dsymutil")
     case .clang:
